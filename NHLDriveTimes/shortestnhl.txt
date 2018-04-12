@@ -1,0 +1,30 @@
+Detroit, MI
+Columbus, OH
+Pittsburgh, PA
+Buffalo, NY
+Toronto, ON, Canada
+Ottawa, ON, Canada
+Montreal, QC, Canada
+Boston, MA
+New York, NY
+East Rutherford, NJ
+Philadelphia, PA
+Washington D.C.
+Raleigh, NC
+Nashville, TN
+St. Louis, MO
+Chicago, IL
+Minneapolis, MN
+Winnipeg, MB, Canada
+Edmonton, AB
+Calgary, AB, Canada
+Vancouver, BC, Canada
+San Jose, CA
+Los Angeles, CA
+Anaheim, CA
+Paradise, NV
+Glendale, AZ
+Denver, CO
+Dallas, TX
+Tampa, FL
+Miami, FL
