@@ -8,6 +8,7 @@ calc_shortest = False # Calculate Distances
 map_it = False # Pretty Map
 calc_time = True # Total Drive time for shortest route
 file_ext = 'nhl'
+api_key = 'APIKEY'
 #-------------------------------------------------------#
 #--------------List of Locations------------------------#
 Atlantic_div = ['Boston, MA','Buffalo, NY','Detroit, MI','Miami, FL','Montreal, QC, Canada','Ottawa, ON, Canada','Tampa, FL','Toronto, ON, Canada']
@@ -20,13 +21,13 @@ NHLTeams = Atlantic_div+Metro_div+Central_div+Pacific_div
 
 def main():
     if create_dist_mat == True:
-        distance_matrix_make(NHLTeams,file_ext)
+        distance_matrix_make(NHLTeams,file_ext,api_key)
     if calc_shortest == True:
         shortest_route_calculation(NHLTeams,file_ext)
     if map_it == True:
         map(file_ext)
     if calc_time == True:
-        calculate_time(file_ext)
+        calculate_time(file_ext,api_key)
 
 main()
 

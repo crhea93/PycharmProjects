@@ -1,10 +1,10 @@
 import googlemaps
 from datetime import datetime
 import time
-gmaps = googlemaps.Client(key='AIzaSyC23WZ06xZau9Gw2R_ulYm6f0L5uxLdAeM')
+
 import numpy as np
 from joblib import Parallel,delayed
-def distance(city1,city2):
+def distance(city1,city2,gmaps):
     now = datetime.now()
     directions_result = gmaps.directions(city1,
                                      city2,
@@ -21,7 +21,8 @@ def fill(team,team_num,team2_num,List,distance_mat):
     else:
         distance_mat[team_num, team2_num] = 100000000000000
 
-def distance_matrix_make(List,file_ext):
+def distance_matrix_make(List,file_ext,APIkey):
+    gmaps = googlemaps.Client(key=APIkey)
     print("Creating Distance Matrix")
     distance_mat = np.zeros((len(List),len(List)))
     for team_num in range(len(List)):
@@ -31,7 +32,7 @@ def distance_matrix_make(List,file_ext):
         for team2_num in range(len(List)):
             team2 = List[team2_num]
             if team_num != team2_num:
-                distance_mat[team_num,team2_num] = distance(team,team2)
+                distance_mat[team_num,team2_num] = distance(team,team2,gmaps)
                 time.sleep(0.1)
             else:
                 distance_mat[team_num,team2_num] = 100000000000000
