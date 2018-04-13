@@ -1,10 +1,11 @@
 from Map import map
 from CreateDistanceMatrix import distance_matrix_make
-from  CalculateShortestRoute import shortest_route_calculation
-
+from CalculateShortestRoute import shortest_route_calculation
+from Time import calculate_time
 create_dist_mat = False  #only if not already made
 calc_shortest = False
-map_it = True
+map_it = False
+calc_time = True
 file_ext = 'nhl'
 
 
@@ -15,6 +16,7 @@ Pacific_div = ['Anaheim, CA','Glendale, AZ','Calgary, AB, Canada','Edmonton, AB'
 NHLTeams = Atlantic_div+Metro_div+Central_div+Pacific_div
 
 
+
 def main():
     if create_dist_mat == True:
         distance_matrix_make(NHLTeams,file_ext)
@@ -22,6 +24,8 @@ def main():
         shortest_route_calculation(NHLTeams,file_ext)
     if map_it == True:
         map(file_ext)
+    if calc_time == True:
+        calculate_time(file_ext)
 
 main()
 
