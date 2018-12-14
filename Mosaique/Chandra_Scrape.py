@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 
 
-os.chdir('/home/user/Documents')
+os.chdir('/home/carterrhea/Documents')
 
 years = ['']
 for i in range(10):
