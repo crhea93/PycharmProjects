@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageOps, ImageSequence
 
 ##--------------------------------------------INPUTS------------------------------------------------------#
-background_image = '/home/carterrhea/Documents/Photos/chandra1.jpeg'
+background_image = '/home/carterrhea/Documents/Photos/chandra_big.jpg'
 photo_repo = '/home/carterrhea/Documents/Photos/16'
 output_file = '/home/carterrhea/Documents/chandra_1_mosaique.png'
 
@@ -42,8 +42,8 @@ class image:
             x_init = 0
             y_init = (self.height - self.width) / 2
         self.name = self.name.crop((x_init, y_init, x_init + new_width, y_init + new_height))
-        self.width = self.name.size[0]
-        self.height = self.name.size[1]
+        self.width = self.name.size[0]*10
+        self.height = self.name.size[1]*10
         self.name.save('/home/carterrhea/Documents/temp.png')
 
     def rescale(self, scale_factor):
@@ -117,7 +117,7 @@ def weighted_avg(color):
 def read_background(background_image):
     bkg = image(Image.open(background_image))
     # now lets also decide how to break up the background image
-    #bkg.crop_im()
+    bkg.crop_im()
     # get pixels from background image
     pixels = []
     for x in range(bkg.width):
