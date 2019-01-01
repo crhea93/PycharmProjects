@@ -13,7 +13,7 @@ from PIL import Image, ImageOps, ImageSequence
 
 ##--------------------------------------------INPUTS------------------------------------------------------#
 background_image = '/home/carterrhea/Documents/Photos/chandra_big.jpg'
-photo_repo = '/home/carterrhea/Documents/Photos/16'
+photo_repo = '/home/carterrhea/Documents/Photos/00'
 output_file = '/home/carterrhea/Documents/chandra_1_mosaique.png'
 
 
@@ -42,8 +42,8 @@ class image:
             x_init = 0
             y_init = (self.height - self.width) / 2
         self.name = self.name.crop((x_init, y_init, x_init + new_width, y_init + new_height))
-        self.width = self.name.size[0]*10
-        self.height = self.name.size[1]*10
+        self.width = self.name.size[0]
+        self.height = self.name.size[1]
         self.name.save('/home/carterrhea/Documents/temp.png')
 
     def rescale(self, scale_factor):
@@ -120,6 +120,7 @@ def read_background(background_image):
     bkg.crop_im()
     # get pixels from background image
     pixels = []
+
     for x in range(bkg.width):
         for y in range(bkg.height):
             r, g, b = bkg.name.getpixel((x, y))
@@ -130,19 +131,18 @@ def read_background(background_image):
 # ------------------------------------------------------#
 # ------------------------------------------------------#
 # Read in other images and crop and rescale
-def read_images(photo_repo):
+def read_images(photo_repo,num_pixs):
     total_num = len(next(os.walk(photo_repo))[2])
-    scaling_factor = np.sqrt(total_num)
+    scaling_factor = num_pixs/total_num
     images_list = []
     count = 0
     for (dirpath, dirnames, filenames) in os.walk(photo_repo):
         for filename in filenames:
             images_list.append(image(Image.open(photo_repo+'/'+filename)))
             #images_list[count].crop_im()
-            images_list[count].rescale(scaling_factor)
+            #images_list[count].rescale(scaling_factor)
             images_list[count].avg_color()
             #images_list[count].name.save('/home/carterrhea/Documents/'+str(count)+'.png')
-
             count += 1
     return images_list
 
@@ -168,9 +168,7 @@ def grouping_pix(pixels,pix_per_tile):
                 new_tiles[tile_number].coord() # calculate center coordinates of tile
                 tile_number += 1
     new_tiles = [super_pix for key, super_pix in new_tiles.items()]
-    for i in new_tiles:
-        print(len(i.pixels))
-        print(i.x,i.y)
+
     return new_tiles
 
 
@@ -201,8 +199,9 @@ def mosaique_final(bkg,images_brightness,coord_brightness,output_file):
 # ------------------------------------------------------#
 def main():
     bkg,pixels = read_background(background_image)
-    images = read_images(photo_repo)
+    images = read_images(photo_repo,len(pixels))
     pix_per_tile = int(len(pixels)/len(images))
+    print(pix_per_tile)
     #Now create the new tiles!
     new_tiles = grouping_pix(pixels,pix_per_tile)
     brightnes_ordered = sorted(new_tiles, key=lambda x: x.brightness) #set Reverse=True if you want the darkest
