@@ -3,15 +3,16 @@ Main file for testing our database commands
 
 '''
 import mysql.connector
-from Database.Add_new import add_cluster_db
+from Add_new import add_obsid_db,add_cluster_db
 #import data base
 mydb = mysql.connector.connect(
   host="localhost",
-  user="crhea93",
-  passwd="ILoveLuci3!",
+  user="carterrhea93",
+  passwd="----",
   database='Lemur_DB'
 )
 mycursor = mydb.cursor()
-add_cluster_db(mydb,mycursor,'Ophiuchus')
+add_cluster_db(mydb,mycursor,'Ophiuchus','10:49','+56:40',0.5)
+add_obsid_db(mydb,mycursor,'Ophiuchus',2021)
 mycursor.close()
 mydb.close()
